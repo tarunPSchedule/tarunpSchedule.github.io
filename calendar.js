@@ -101,11 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             availableTimesDiv.classList.remove("show");
                         }
 
-                        // Update the times and slide in the new box
-                        setTimeout(() => {
-                            timesDisplay.textContent = times.join(", ");
-                            availableTimesDiv.classList.add("show");
-                        }, 500); // Delay to allow slide-down animation
+                        // Update the times immediately before showing the new box
+                        timesDisplay.textContent = times.join(", ");
+                        availableTimesDiv.classList.add("show");
 
                         currentDayBox = dayBox; // Update the current active box
 
