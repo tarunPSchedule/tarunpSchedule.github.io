@@ -43,12 +43,18 @@
             cursor: pointer;
             border-radius: 4px;
             background-color: #fefefe;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
             box-sizing: border-box; /* Include padding and border in width calculation */
         }
         .day:hover {
             background-color: #e8f5e9;
-            transform: scale(1.05);
+            transform: scale(1.1); /* Pop forward on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+        }
+        .day:active {
+            transform: scale(0.9) rotate(-2deg); /* Shrink and rotate slightly on click */
+            background-color: #c8e6c9; /* Slightly darker green on click */
+            transition: transform 0.1s, background-color 0.1s; /* Faster transition for click */
         }
         #free-times {
             max-width: 800px;

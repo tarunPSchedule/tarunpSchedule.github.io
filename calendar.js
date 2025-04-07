@@ -91,6 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (times) {
                         timesDisplay.textContent = times.join(", ");
                         freeTimesDiv.style.display = "block";
+
+                        // Add a temporary animation effect
+                        dayBox.style.transition = "transform 0.3s ease";
+                        dayBox.style.transform = "rotate(5deg) scale(1.2)";
+                        setTimeout(() => {
+                            dayBox.style.transform = "rotate(0deg) scale(1)";
+                        }, 300);
                     }
                 });
             }
