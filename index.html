@@ -32,9 +32,11 @@
         }
         .week-row {
             display: flex;
-            gap: 10px; /* Add spacing between days */
+            justify-content: space-between; /* Ensure even spacing between columns */
+            gap: 0; /* Remove extra gap to align columns properly */
         }
         .day {
+            flex: 1; /* Ensure equal width for all day boxes */
             padding: 15px;
             border: 1px solid #ddd;
             text-align: center;
@@ -42,6 +44,7 @@
             border-radius: 4px;
             background-color: #fefefe;
             transition: background-color 0.3s, transform 0.2s;
+            box-sizing: border-box; /* Include padding and border in width calculation */
         }
         .day:hover {
             background-color: #e8f5e9;
