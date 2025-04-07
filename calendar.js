@@ -38,6 +38,8 @@ const freeTimes = {
 const timesDisplay = document.getElementById("times");
 const availableTimesDiv = document.getElementById("available-times");
 
+let currentDayBox = null; // Track the currently active day box
+
 document.addEventListener("DOMContentLoaded", () => {
     const calendar = document.getElementById("calendar");
 
@@ -89,13 +91,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 dayBox.addEventListener("click", () => {
                     const times = freeTimes[`${dayOfWeek} ${day}`];
                     if (times) {
-                        timesDisplay.textContent = times.join(", ");
-                        availableTimesDiv.classList.toggle("show"); // Toggle visibility
+                        if (currentDayBox === dayBox) {
+                            // If the same box is clicked, do nothing
+                            return;
+                        }
 
-                        // Hide the box when clicked again
-                        availableTimesDiv.addEventListener("click", () => {
+                        if (currentDayBox) {
+                            // Slide down the current box
                             availableTimesDiv.classList.remove("show");
-                        });
+                        }
+
+                        // Update the times and slide in the new box
+                        setTimeout(() => {
+                            timesDisplay.textContent = times.join(", ");
+                            availableTimesDiv.classList.add("show");
+                        }, 500); // Delay to allow slide-down animation
+
+                        currentDayBox = dayBox; // Update the current active box
 
                         // Add a temporary animation effect
                         dayBox.style.transition = "transform 0.3s ease";
