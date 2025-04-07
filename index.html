@@ -3,32 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Calendar</title>
+    <title>Tarun Parameswaran Internship Schedule</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #4CAF50;
+            font-size: 2em;
+        }
         .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            display: flex;
+            flex-direction: column; /* Ensure each week is in its own row */
+            gap: 15px; /* Add spacing between weeks */
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .week-row {
+            display: flex;
+            gap: 10px; /* Add spacing between days */
         }
         .day {
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 15px;
+            border: 1px solid #ddd;
             text-align: center;
             cursor: pointer;
+            border-radius: 4px;
+            background-color: #fefefe;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .day:hover {
-            background-color: #f0f0f0;
+            background-color: #e8f5e9;
+            transform: scale(1.05);
         }
         #free-times {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: none;
+        }
+        #free-times h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        #times {
+            font-size: 1.1em;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <h1>Interactive Calendar</h1>
+    <h1>Tarun Parameswaran Internship Schedule</h1>
     <div class="calendar" id="calendar">
         <!-- Days will be dynamically generated -->
     </div>

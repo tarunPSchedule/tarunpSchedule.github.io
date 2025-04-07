@@ -35,20 +35,45 @@ const freeTimes = {
     "Friday May 23": ["9:27 - 12:47 pm"]
 };
 
-const calendar = document.getElementById("calendar");
 const timesDisplay = document.getElementById("times");
 const freeTimesDiv = document.getElementById("free-times");
 
-// Generate calendar blocks
-Object.keys(freeTimes).forEach(date => {
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "day";
-    dayDiv.textContent = date;
-    dayDiv.dataset.date = date;
-    dayDiv.addEventListener("click", () => {
-        const times = freeTimes[date];
-        timesDisplay.textContent = times.join(", ");
-        freeTimesDiv.style.display = "block";
+document.addEventListener("DOMContentLoaded", () => {
+    const calendar = document.getElementById("calendar");
+
+    // Define the date ranges for each row
+    const dateRanges = [
+        ["April 8", "April 9", "April 10", "April 11"],
+        ["April 14", "April 15", "April 16", "April 17", "April 18"],
+        ["April 21", "April 22", "April 23", "April 24", "April 25"],
+        ["April 28", "April 29", "April 30", "May 1", "May 2"],
+        ["May 5", "May 6", "May 7", "May 8", "May 9"],
+        ["May 12", "May 13", "May 14", "May 15", "May 16"],
+        ["May 19", "May 20", "May 21", "May 22", "May 23"]
+    ];
+
+    // Generate the calendar grid
+    dateRanges.forEach(week => {
+        const row = document.createElement("div");
+        row.className = "week-row"; // Add a class for styling
+        row.style.display = "flex"; // Ensure each week is in a single row
+        row.style.gap = "10px"; // Add spacing between days
+
+        week.forEach(day => {
+            const dayBox = document.createElement("div");
+            dayBox.className = "day";
+            dayBox.textContent = day;
+            dayBox.dataset.date = day;
+            dayBox.addEventListener("click", () => {
+                const times = freeTimes[`Tuesday ${day}`] || freeTimes[`Wednesday ${day}`] || freeTimes[`Thursday ${day}`] || freeTimes[`Friday ${day}`] || freeTimes[`Monday ${day}`];
+                if (times) {
+                    timesDisplay.textContent = times.join(", ");
+                    freeTimesDiv.style.display = "block";
+                }
+            });
+            row.appendChild(dayBox);
+        });
+
+        calendar.appendChild(row);
     });
-    calendar.appendChild(dayDiv);
 });
