@@ -29,6 +29,7 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: warbly-light 3s infinite;
         }
         .week-row {
             display: flex;
@@ -56,7 +57,7 @@
             background-color: #c8e6c9; /* Slightly darker green on click */
             transition: transform 0.1s, background-color 0.1s; /* Faster transition for click */
         }
-        #free-times {
+        #available-times {
             max-width: 800px;
             margin: 20px auto;
             padding: 15px;
@@ -64,9 +65,16 @@
             border-radius: 8px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: none;
+            position: fixed;
+            bottom: -100%; /* Start off-screen */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: bottom 0.5s ease; /* Smooth slide-in effect */
         }
-        #free-times h2 {
+        #available-times.show {
+            bottom: 20px; /* Slide into view */
+        }
+        #available-times h2 {
             margin-top: 0;
             color: #4CAF50;
         }
@@ -80,6 +88,20 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        @keyframes warbly-light {
+            0% {
+                background-color: #e8f5e9;
+                box-shadow: 0 0 10px 5px rgba(76, 175, 80, 0.5);
+            }
+            50% {
+                background-color: #c8e6c9;
+                box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0.7);
+            }
+            100% {
+                background-color: #e8f5e9;
+                box-shadow: 0 0 10px 5px rgba(76, 175, 80, 0.5);
+            }
+        }
     </style>
 </head>
 <body>
@@ -87,8 +109,8 @@
     <div class="calendar" id="calendar">
         <!-- Days will be dynamically generated -->
     </div>
-    <div id="free-times">
-        <h2>Free Times</h2>
+    <div id="available-times">
+        <h2>Available Times</h2>
         <p id="times"></p>
     </div>
     <script src="calendar.js"></script>
