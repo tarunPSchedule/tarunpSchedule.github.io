@@ -52,25 +52,48 @@ document.addEventListener("DOMContentLoaded", () => {
         ["May 19", "May 20", "May 21", "May 22", "May 23"]
     ];
 
+    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+    // Create a header row for the days of the week
+    const headerRow = document.createElement("div");
+    headerRow.className = "week-row";
+    headerRow.style.display = "flex";
+    headerRow.style.gap = "10px";
+
+    daysOfWeek.forEach(day => {
+        const header = document.createElement("div");
+        header.className = "day-header";
+        header.textContent = day;
+        header.style.fontWeight = "bold";
+        header.style.textAlign = "center";
+        header.style.flex = "1"; // Ensure equal spacing
+        headerRow.appendChild(header);
+    });
+
+    calendar.appendChild(headerRow);
+
     // Generate the calendar grid
     dateRanges.forEach(week => {
         const row = document.createElement("div");
-        row.className = "week-row"; // Add a class for styling
-        row.style.display = "flex"; // Ensure each week is in a single row
-        row.style.gap = "10px"; // Add spacing between days
+        row.className = "week-row";
+        row.style.display = "flex";
+        row.style.gap = "10px";
 
-        week.forEach(day => {
+        daysOfWeek.forEach(dayOfWeek => {
+            const day = week.find(date => freeTimes[`${dayOfWeek} ${date}`]);
             const dayBox = document.createElement("div");
             dayBox.className = "day";
-            dayBox.textContent = day;
-            dayBox.dataset.date = day;
-            dayBox.addEventListener("click", () => {
-                const times = freeTimes[`Tuesday ${day}`] || freeTimes[`Wednesday ${day}`] || freeTimes[`Thursday ${day}`] || freeTimes[`Friday ${day}`] || freeTimes[`Monday ${day}`];
-                if (times) {
-                    timesDisplay.textContent = times.join(", ");
-                    freeTimesDiv.style.display = "block";
-                }
-            });
+            dayBox.textContent = day || ""; // Leave empty if no date matches
+            dayBox.dataset.date = day || "";
+            if (day) {
+                dayBox.addEventListener("click", () => {
+                    const times = freeTimes[`${dayOfWeek} ${day}`];
+                    if (times) {
+                        timesDisplay.textContent = times.join(", ");
+                        freeTimesDiv.style.display = "block";
+                    }
+                });
+            }
             row.appendChild(dayBox);
         });
 
